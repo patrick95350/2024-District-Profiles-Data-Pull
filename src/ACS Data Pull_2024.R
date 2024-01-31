@@ -249,12 +249,6 @@ write.csv(my.data,
 # Check ending time
 tictoc::toc()
 
-
-
-
-
 # ###########
 # ### EOF ###
 # ###########
-
-

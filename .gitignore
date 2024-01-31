@@ -1,0 +1,22 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# ignore private folder (primarily API keys)
+private
+
+# ignore archive folder (primarily old saved from before git was used)
+archive
+
+# ignore docs, logs and output folders (don't need that on GitHub)
+docs
+logs
+tests
+out
+uploads
+www
+temp
+
+# ignore deprecated files
+*_DEPRECATED*

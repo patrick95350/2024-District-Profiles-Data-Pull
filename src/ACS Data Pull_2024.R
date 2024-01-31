@@ -158,6 +158,9 @@ get.acs.subject.var <- function(endyear, span, geography, variable, key){
 #   }
 # Save to separate file for every geography
 
+#  Set starting time
+tictoc::tic()
+
 # Get list of geographies
 my.geographies <- c("state:06",
                     paste0("county:", str_pad(seq(from=1, to=116, by=2), 3, "left", "0"), "&in=state:06"),
@@ -198,9 +201,7 @@ for(k in 1:length(my.geographies)){
 
 # Merge Individual Files into Combined
 my.data <- NULL
-#my.file <- list.files(path = "out")
-#my.file <- list.files(path = "output", pattern="_S2503")
-# for(my.file in list.files(path="output", pattern="_S2503")){
+
 for(my.file in list.files(path="temp")){
   temp <- cbind(Geo=my.file,
                 read.csv(file = file.path("temp", my.file),
@@ -230,9 +231,6 @@ for(i in 1:nrow(counties)){
   my.data$Geo[k] <- counties[i,1]
 }
 
-# Just the S2503 tables
-#my.data <- my.data[grep("S2503_", my.data$Name),]
-
 # Sort correctly
 my.data <- cbind(Level = 2, my.data)
 
@@ -248,108 +246,15 @@ write.csv(my.data,
           file = file.path("out", paste0("output_", format(Sys.Date(), "%Y%m%d"), ".csv")),
           row.names = FALSE)
 
-# write.csv(my.data,
-#           file = "output_wide_20200427_corrected.csv",
-#           row.names = FALSE)
-# 
-# my.data1 <- read.csv(file = "output_wide_20200409.csv",
-#                      stringsAsFactors = FALSE)
-# my.data2 <- read.csv(file = "output_wide_20200427_S2503.csv",
-#                      stringsAsFactors = FALSE)
-# 
-# my.data <- rbind(my.data1[-(grep(pattern = "S2503_", my.data1$Name)),],
-#                  my.data2)
-# 
-# write.csv(my.data, file = "output.csv",
-#           row.names = FALSE)
-
-#print(paste0("Started at ", start.time, ". Finished at ", date()))
-
-
-
-# ##############################
-# ### Old Version DO NOT RUN ###
-# ##############################
-
-# ##################
-# ### Short List ###
-# ##################
-
-# my.vars <- as.vector(read.csv(file = "tract_geo.csv",
-# stringsAsFactors = FALSE)[,1])
-
-# my.geographies <- "tract:*&in=state:06"
-
-# for(current.geo in my.geographies) {
-# for (current.var in my.vars) {
-# print(paste0("Geo: ", current.geo, ". Var:", current.var))
-# my.data <- rbind(
-# my.data,
-# get.acs.subject.var(
-# endyear = most.recent.year,
-# span = 5,
-# geography = current.geo,
-# variable = current.var,
-# key = my.key
-# )
-# )
-# }
-# }
-
-# ###################
-# ### Time Series ###
-# ###################
-
-# my.vars <- as.vector(read.csv(file = "timeseries_geo.csv",
-# stringsAsFactors = FALSE)[,1])
-
-# my.geographies <- c("state:06",
-# "county:*&in=state:06",
-# "state%20legislative%20district%20(upper%20chamber):*&in=state:06",
-# "state%20legislative%20district%20(lower%20chamber):*&in=state:06")
-
-# my.years <- seq(2012, most.recent.year)
-
-# my.data.ts <- NULL
-
-# for(current.geo in my.geographies) {
-# for (current.var in my.vars) {
-# for(current.year in my.years){
-# print(paste0("Geo: ", current.geo, ". Var:", current.var, ". Year:", current.year))
-# my.data.ts <- rbind(
-# my.data.ts,
-# get.acs.subject.var(
-# endyear = current.year,
-# span = 5,
-# geography = current.geo,
-# variable = current.var,
-# key = my.key
-# )
-# )
-# }
-# }
-# }
-
-
-# #################
-# ### Save Data ###
-# #################
-
-# write.csv(my.data, file = "output.csv",
-# row.names = FALSE)
-
-# write.csv(my.data.ts, file = "output_ts.csv",
-# row.names = FALSE)
-
-# print(paste0("Started at ", start.time, ". Finished at ", date()))
+# Check ending time
+tictoc::toc()
 
 
 
 
-# ##################
-# ### SCRAP CODE ###
-# ##################
+
+# ###########
+# ### EOF ###
+# ###########
 
 
-
-# # error on S2701_C04_001E

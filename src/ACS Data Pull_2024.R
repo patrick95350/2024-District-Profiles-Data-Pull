@@ -243,8 +243,10 @@ my.data <- my.data[order(my.data$Name, my.data$Level),-1]
 
 # Export final data
 write.csv(my.data,
-          file = file.path("out", paste0("output_", format(Sys.Date(), "%Y%m%d"), ".csv")),
+          file = file.path("out", paste0(most.recent.year, " ACS Data for District Profiles ", Sys.Date(), ".csv")),
           row.names = FALSE)
+
+
 
 # Check ending time
 tictoc::toc()

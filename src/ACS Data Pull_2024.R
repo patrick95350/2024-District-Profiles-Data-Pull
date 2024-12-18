@@ -2,7 +2,7 @@
 #     Pull State, County, District and Tract-level Data from ACS
 #
 #     By Patrick Rogers, California Research Bureau
-#       Oct 2018, Updated Jan 2024
+#       Oct 2018, Updated Dec 2025
 #     Uses the following Packages
 #       stringr
 #
@@ -17,7 +17,7 @@
 #       timeseries_geo.csv
 
 # ToDo 
-#   The get ddata from ACS step takes 48 hours to run. Optimize to reduce calls to API
+#   The get data from ACS step takes 48 hours to run. Optimize to reduce calls to API
 #   county FIPs is coming from saving csv file, update to get from ACS via API
 
 # Clear Workspace
@@ -29,7 +29,7 @@ library(here)
 library(tictoc)
 
 # User Inits
-most.recent.year <- 2022
+most.recent.year <- 2023
 
 # Inits
 setwd(here::here())
